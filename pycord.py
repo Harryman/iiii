@@ -7,9 +7,10 @@ import pymongo
 from pymongo import MongoClient
 
 
-#mongo setup---------------
+mongo setup---------------
 mongo = MongoClient('mongoURL')
-collect = db.whProto1Log
+db = mongo.bitHeat
+collect = db.whProtoLog1
 
 
 adc.setup()
@@ -59,6 +60,11 @@ def ain2c(adcVal):
 		return "Conversion Not Found"
 	else:
 		return "NC"
+a0 = 0
+a1 = 0
+a2 = 0
+a3 = 0
+aCount = 0
 
 try:
 	while True:
@@ -80,8 +86,8 @@ try:
 			a2 = ain2c(a2)
 			a3 = ain2c(a3)
 			os.system('clear')
-			f.write(time.time()+","+str(a0)+","+str(a1)+","+str(a2)+","+str(a3)+","+str(flow)+"\n")
-			log = {"timeStamp":datetime.datetime.now(),"hotTank":a0,"whIn":a1,"whOut":a2,"whTank":a3,"mL":flow}
+			#f.write(str(time.time())+","+str(a0)+","+str(a1)+","+str(a2)+","+str(a3)+","+str(flow)+"\n")
+			log = {"timeStamp":datetime.datetime.now(),"hotTank":str(a0),"whIn":str(a1),"whOut":str(a2),"whTank":str(a3),"mL":str(flow)}
 			collect.insert(log)
 			print "A0 Hot Tank Temp:", 
 			print a0
