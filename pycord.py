@@ -36,7 +36,7 @@ f = open((time.ctime()+".csv"),'w')
 f.write("timeStamp,Hot Tank Temp, WH in Temp, WH out Temp,WH Tank Temp, ml Since last Timestamp\n")
 
 pumpPin = "GPIO1_28"
-io.setup(, io.IN)
+io.setup(pumpPin, io.IN)
 #io.cleanup()
 io.add_event_detect(pumpPin,io.RISING)
 last = time.time()
@@ -67,10 +67,10 @@ try:
 		a2 +=adc.read('AIN2')
 		a3 +=adc.read('AIN3')	
 		aCount += 1
-		if io.event_detected("GPIO1_28"):
+		if io.event_detected("pumpPin"):
 			flow += 91.667 
 
-		if((time.time() - 1))> last): 
+		if((time.time() - 1)> last): 
 			a0 /= aCount
 			a1 /= aCount
 			a2 /= aCount
